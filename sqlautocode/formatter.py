@@ -105,9 +105,14 @@ def index_repr(index):
             }
     return util.as_out_str(constants.INDEX % data)
 
+def check_constraint_repr(cc):
+    data = {'sqltext': cc.sqltext}
+    return util.as_out_str(constants.CHECK_CONSTRAINT % data)
+
 def monkey_patch_sa():
     sqlalchemy.sql.expression._TextClause.__repr__ = textclause_repr
     sqlalchemy.schema.Table.__repr__ = table_repr
     sqlalchemy.schema.Column.__repr__ = column_repr
     sqlalchemy.schema.ForeignKeyConstraint.__repr__ = foreignkeyconstraint_repr
     sqlalchemy.schema.Index.__repr__ = index_repr
+    sqlalchemy.schema.CheckConstraint.__repr__ = check_constraint_repr
